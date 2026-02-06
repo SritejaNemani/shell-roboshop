@@ -32,7 +32,7 @@ do
          --instance-ids $INSTANCE_ID \
          --query 'Reservations[*].Instances[*].PrivateIpAddress' --output text
         )
-        RECORD_NAME="$intsance.$DOMAIN_NAME" # mongodb.nemani.online
+        RECORD_NAME="$intance.$DOMAIN_NAME" # mongodb.nemani.online
         echo "$RECORD_NAME"
     fi
     
