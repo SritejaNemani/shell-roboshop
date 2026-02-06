@@ -2,6 +2,8 @@
 
 SG_ID="sg-0f1ebec62fce41ad5"
 AMI_ID="ami-0220d79f3f480ecf5"
+ZONE_ID="Z0104567LB0WMHMT0CWH"
+DOMAIN_NAME="nemani.online"
 
 
 for instance in $@
@@ -21,15 +23,41 @@ do
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --output text 
         )
+        RECORD_NAME="$DOMAIN_NAME" # nemani.online
     else 
        IP=$( 
          aws ec2 describe-instances \
          --instance-ids $INSTANCE_ID \
          --query 'Reservations[*].Instances[*].PrivateIpAddress' --output text
         )
+        RECORD_NAME="$intsance.$DOMAIN_NAME" # mongodb.nemani.online
     fi
     
     echo "IP Address: $IP"
+
+    aws route53 change-resource-record-sets \
+    --hosted-zone-id $ZONE_ID \
+    --change-batch '
+    {
+        "Comment": "Updating record",
+        "Changes": [
+            {
+            "Action": "CREATE",
+            "ResourceRecordSet": {
+                "Name": "'$RECORD_NAME'",
+                "Type": "A",
+                "TTL": 1,
+                "ResourceRecords": [
+                {
+                    "Value": "'$IP'"
+                }
+                ]
+            }
+            }
+        ]
+    }
+    '
+ echo "Record updated for $instance"
 
 done
 
