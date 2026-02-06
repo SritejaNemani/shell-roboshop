@@ -24,6 +24,8 @@ do
             --output text 
         )
         RECORD_NAME="$DOMAIN_NAME" # nemani.online
+        echo "$RECORD_NAME"
+        
     else 
        IP=$( 
          aws ec2 describe-instances \
@@ -31,6 +33,7 @@ do
          --query 'Reservations[*].Instances[*].PrivateIpAddress' --output text
         )
         RECORD_NAME="$intsance.$DOMAIN_NAME" # mongodb.nemani.online
+        echo "$RECORD_NAME"
     fi
     
     echo "IP Address: $IP"
