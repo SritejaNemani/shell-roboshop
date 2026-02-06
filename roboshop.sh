@@ -21,7 +21,7 @@ intanceId = $(aws ec2 run-instances \
         --query 'Reservations[*].Instances[*].PublicIpAddress' \
         --output text 
         )
-   else 
+      else 
       IP = $( 
       aws ec2 describe-instances \
       --instance-ids $InstanceId \
