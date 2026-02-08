@@ -24,3 +24,10 @@ VALIDATE(){
       echo -e "$2 $G Success $N" | tee -a $LOGS_FILE
    fi
 }
+
+cp mongo.repo /etc/yum.repos.d/mongo.repo
+VALIDATE $? "Copying Mongo Repo"
+
+dnf install mongodb-org -y
+VALIDATE $? "Installing MongoDB Server"
+
