@@ -95,8 +95,8 @@ VALIDATE $? "Installing MySQL client"
 
 mysql -h mysql.nemani.online -uroot -pRoboShop@1 -e 'use cities' #logins and checks if cities exists or not
 
-if [ $? -eq 0]; then
-    echo -e " data is already loaded $Y Skipping $N"
+if [ $? -eq 0 ]; then
+    echo -e "data is already loaded $Y Skipping $N"
 else
     echo "Loading the data"
 
