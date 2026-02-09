@@ -90,7 +90,7 @@ systemctl start catalogue &>>$LOGS_FILE
 VALIDATE $? "Starting Catalogue Server"
 
 echo "Copying Mongo Repo"
-cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGS_FILE
+cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGS_FILE
 VALIDATE $? "Copying Mongo Repo"
 
 echo "Installing Mongo Client"
