@@ -53,7 +53,7 @@ mkdir -p /app &>>$LOGS_FILE
 VALIDATE $? "Creating App Directory"
 
 echo "Downloading catalog code"
-curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip &>>$LOGS_FILE
+curl -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip &>>$LOGS_FILE
 VALIDATE $? "Downloading catalog code"
 
 echo "Opening app Directory"
