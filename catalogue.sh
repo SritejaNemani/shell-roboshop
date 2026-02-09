@@ -7,6 +7,7 @@ R="\e[31m" #red
 G="\e[32m" #green
 Y="\e[33m" #yellow
 N="\e[0m" #normal-white
+SCRIPT_DIR=$PWD
 
 if [ $USER_ID -ne 0 ]; then
    echo -e "$R Not root user - please run this script with root user$N" | tee -a $LOGS_FILE
@@ -58,6 +59,10 @@ echo "Opening app Directory"
 cd /app 
 VALIDATE $? "Opening app Directory"
 
+echo "Removing all existing files in App directory"
+rm -rf /app/* &>>$LOGS_FILE
+VALIDATE $? "Removing all existing files in App directory"
+
 echo "Unzipping the downloaded code"
 unzip /tmp/catalogue.zip &>>$LOGS_FILE
 VALIDATE $? "Unzipping the downloaded code"
@@ -65,15 +70,15 @@ VALIDATE $? "Unzipping the downloaded code"
 cd /app 
 
 echo "Installing Dependencies"
-npm install 
+npm install &>>$LOGS_FILE
 VALIDATE $? "Installing Dependencies"
 
 echo "Creating Systemctl Service"
-cp catalogue.service /etc/systemd/system/catalogue.service
+cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service &>>$LOGS_FILE
 VALIDATE $? "Creating Systemctl Service"
 
 echo "Loading the Service"
-systemctl daemon-reload
+systemctl daemon-reload &>>$LOGS_FILE
 VALIDATE $? "Loading the Service"
 
 echo "Enabling Catalogue Server"
@@ -85,11 +90,11 @@ systemctl start catalogue &>>$LOGS_FILE
 VALIDATE $? "Starting Catalogue Server"
 
 echo "Copying Mongo Repo"
-cp mongo.repo /etc/yum.repos.d/mongo.repo
+cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGS_FILE
 VALIDATE $? "Copying Mongo Repo"
 
 echo "Installing Mongo Client"
-dnf install mongodb-mongosh -y
+dnf install mongodb-mongosh -y &>>$LOGS_FILE
 VALIDATE $? "Installing Mongo Client"
 
 
