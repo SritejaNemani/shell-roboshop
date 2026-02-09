@@ -8,7 +8,7 @@ G="\e[32m" #green
 Y="\e[33m" #yellow
 N="\e[0m" #normal-white
 SCRIPT_DIR=$PWD
-$MYSQL_HOST=mysql.nemani.online
+MYSQL_HOST=mysql.nemani.online
 
 if [ $USER_ID -ne 0 ]; then
    echo -e "$R Not root user - please run this script with root user$N" | tee -a $LOGS_FILE
