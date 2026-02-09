@@ -53,7 +53,7 @@ mkdir -p /app &>>$LOGS_FILE
 VALIDATE $? "Creating App Directory"
 
 echo "Downloading catalog code"
-curl -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip &>>$LOGS_FILE
+curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip &>>$LOGS_FILE
 VALIDATE $? "Downloading catalog code"
 
 echo "Opening app Directory"
@@ -65,7 +65,7 @@ rm -rf /app/* &>>$LOGS_FILE
 VALIDATE $? "Removing all existing files in App directory"
 
 echo "Unzipping the downloaded code"
-unzip /tmp/catalogue.zip &>>$LOGS_FILE
+unzip /tmp/cart.zip &>>$LOGS_FILE
 VALIDATE $? "Unzipping the downloaded code"
 
 cd /app 
