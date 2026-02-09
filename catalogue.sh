@@ -33,10 +33,6 @@ echo "Enabling V.20 of NodeJS"
 dnf module enable nodejs:20 -y &>>$LOGS_FILE
 VALIDATE $? "Enabling V.20 of NodeJS"
 
-echo "Enabling MongoDB Server"
-systemctl enable mongod &>>$LOGS_FILE
-VALIDATE $? "Enabling MongoDB Server"
-
 echo "Installing NodeJS"
 dnf install nodejs -y &>>$LOGS_FILE
 VALIDATE $? "Installing NodeJS"
