@@ -43,5 +43,7 @@ echo "Starting RabbitMQ Server"
 systemctl start rabbitmq-server &>>$LOGS_FILE
 VALIDATE $? "Starting RabbitMQ Server"
 
+echo "Creating User and giving Permisiions"
 rabbitmqctl add_user roboshop roboshop123
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+VALIDATE $? "Creating User and giving Permisiions"
