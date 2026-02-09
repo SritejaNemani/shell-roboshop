@@ -8,6 +8,7 @@ G="\e[32m" #green
 Y="\e[33m" #yellow
 N="\e[0m" #normal-white
 SCRIPT_DIR=$PWD
+MONGODB_HOST=mongodb.nemani.online
 
 if [ $USER_ID -ne 0 ]; then
    echo -e "$R Not root user - please run this script with root user$N" | tee -a $LOGS_FILE
@@ -98,4 +99,6 @@ dnf install mongodb-mongosh -y &>>$LOGS_FILE
 VALIDATE $? "Installing Mongo Client"
 
 
+# INDEX=$(mongosh --host $MONGODB_HOST --quiet  --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
+mongosh --host $MONGODB_HOST  </app/db/master-data.js
 
