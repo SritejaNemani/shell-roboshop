@@ -76,11 +76,11 @@ echo "Loading the Service"
 systemctl daemon-reload &>>$LOGS_FILE
 VALIDATE $? "Loading the Service"
 
-echo "Enabling Cart Server"
+echo "Enabling Payment Server"
 systemctl enable payment &>>$LOGS_FILE
-VALIDATE $? "Enabling Cart Server"
+VALIDATE $? "Enabling Payment Server"
 
-echo "Starting Cart Server"
+echo "Starting Payment Server"
 systemctl start payment &>>$LOGS_FILE
-VALIDATE $? "Starting Cart Server"
+VALIDATE $? "Starting Payment Server"
 
